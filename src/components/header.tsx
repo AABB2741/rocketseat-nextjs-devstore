@@ -1,6 +1,7 @@
-import { Search, ShoppingBag } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { CartWidget } from './cart-widget'
+import { SearchForm } from './search-form'
 
 export function Header() {
   return (
@@ -10,20 +11,10 @@ export function Header() {
           devstore
         </Link>
 
-        <form className="flex w-[320px] items-center gap-3 rounded-full bg-zinc-900 px-5 py-3 ring-zinc-700">
-          <Search className="size-5 text-zinc-500" />
-
-          <input
-            placeholder="Buscar produtos"
-            className="flex-1 bg-transparent text-sm outline-none placeholder:text-zinc-500"
-          />
-        </form>
+        <SearchForm />
       </div>
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2">
-          <ShoppingBag className="size-4" />
-          <span className="text-sm">Cart (0)</span>
-        </div>
+        <CartWidget />
 
         <div className="w-px h-4 bg-zinc-700" />
 
@@ -41,3 +32,11 @@ export function Header() {
     </header>
   )
 }
+
+/**
+ * Hard Navigation x Soft Navigation
+ *
+ * Ao usar um hard navigation (<a href ="/" />), toda a página é recarregada, o que não faz sentido para uma SPA.
+ *
+ * Usando um Soft Navigation (<Link href="/" />), a navegação é feita carregando somente os códigos necessários, sem recarregar a página inteira
+ */

@@ -7,7 +7,14 @@ import { Product } from '@/data/schemas/product'
 type GetFeaturedProductsResponse = Product[]
 
 async function getFeaturedProducts() {
-  const response = await api<GetFeaturedProductsResponse>('/products/featured')
+  const response = await api<GetFeaturedProductsResponse>(
+    '/products/featured',
+    {
+      next: {
+        revalidate: 60 * 60, // 1 hour
+      },
+    },
+  )
 
   const data = await response.json()
   return data
